@@ -1,31 +1,33 @@
-// Arrays to keep track of each task's state
-const taskTitles = [];
-const taskComplete = [];
+const newTask = function(title, description) {
+  const task = {
+    title: title,
+    description: description,
+    complete: false, //remember your commas when turning functions into methods of other functions.
+    logTaskState: function() {
+      console.log(`${this.title} has${this.complete ? " " : " not "}been completed`);
+    },
+    markComplete: function() {
+      this.complete = true;
+    }
+  };
+  return task;
+};
+const task1 = newTask("Clean cat litter", "Take all the 💩 out of the litter box");
+const task2 = newTask("Do Laundry", "Clean clothes are nice!");
+const tasksAll = [task1, task2];
 
-// Create a new task by adding to the arrays
-// A new task will be created as incomplete
-function newTask(title) {
-  taskTitles.push(title);
-  taskComplete.push(false);
-}
+// const logAll = function(myTasks) {
+//   myTasks.forEach(task => task.logTaskState())
+// }
+// logAll(tasksAll)
+// created a function to log all task states at once
 
-// Mark a task as complete by setting the task's status in the `taskComplete` array to `true`
-function completeTask(taskIndex) {
-  taskComplete[taskIndex] = true;
-}
+task2.logTaskState(); // Clean Cat Litter has not been completed
+task2.markComplete();
+task2.logTaskState(); // Clean Cat Litter has been completed
 
-// Print the state of a task to the console in a nice readable way
-function logTaskState(taskIndex) {
-  const title = taskTitles[taskIndex];
-  const complete = taskComplete[taskIndex];
-  console.log(`${title} has${complete ? " " : " not "}been completed`);
-}
+// In JavaScript, a method is simply a function that is a property of an object.In your newTask function, you created two methods for each task object:
 
-// DRIVER CODE BELOW
+//   logTaskState: This method logs the current state of the task(whether it has been completed or not).
+//     markComplete: This method marks the task as complete by setting the complete property to true.
 
-newTask("Clean Cat Litter"); // task 0
-newTask("Do Laundry"); // task 1
-
-logTaskState(0); // Clean Cat Litter has not been completed
-completeTask(0);
-logTaskState(0); // Clean Cat Litter has been completed
